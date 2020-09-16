@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader
 
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import EarlyStopping
+from pytorch_lightning.metrics.functional import accuracy
 from pytorch_lightning.loggers import CometLogger
 
 pl.seed_everything(42)
@@ -48,6 +49,7 @@ class CIFARTenLitModel(pl.LightningModule):
     def __init__(self, hparams):
         super().__init__()
         self.hparams = hparams
+        # self.lr = lr
         backbone = models.resnet50(pretrained=True)
         for param in backbone.parameters():
             param.requires_grad = False
@@ -67,23 +69,25 @@ class CIFARTenLitModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         y_hat = self(x)
+        acc = accuracy(y_hat, y)        
         loss = F.cross_entropy(y_hat, y)
         result = pl.TrainResult(loss)
         result.log("train_loss", loss, prog_bar=True)
+        result.log("train_acc", acc)        
         return result
     
     def validation_step(self, batch, batch_idx):
         x, y = batch
         y_hat = self(x)
         loss = F.cross_entropy(y_hat, y)
+        acc = accuracy(y_hat, y)        
         result = pl.EvalResult(checkpoint_on=loss)
         result.log("val_loss", loss)
+        result.log("val_acc", acc)
         return result
     
     def configure_optimizers(self):
         return optim.Adam(self.parameters(), lr=self.hparams.lr)
-
-
 
     class CIFAR10ResnetDense(BaseLitModel):
         def __init__(self, *args, **kwargs):

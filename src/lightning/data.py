@@ -2,9 +2,17 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms, datasets, models, utils
 
+# Transforms
+tfms = transforms.Compose([
+    transforms.Resize(224),
+    transforms.ToTensor(),
+    transforms.Normalize([0.4914, 0.4822, 0.4465], [0.247, 0.243, 0.261])
+])
+
 class CIFAR10DataModule(pl.LightningDataModule):
     def __init__(self, hparams, data_dir = "./data", train_transforms=None, val_transforms=None, test_transforms=None):
         super().__init__(train_transforms=train_transforms, val_transforms=val_transforms, test_transforms=test_transforms)
+        self.data_dir = data_dir
         self.hparams = hparams
 
     def prepare_data(self, ):
