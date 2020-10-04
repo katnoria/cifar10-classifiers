@@ -133,3 +133,5 @@ logs/
 notebooks/logs/
 notebooks/model/
 notebooks/lightning_logs/
+
+._*.ipynb
