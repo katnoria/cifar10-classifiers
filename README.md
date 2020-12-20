@@ -1,9 +1,16 @@
-# cpu-gpu-tpu
-Model training on cpu, gpu and tpu
+# Build CIFAR 10 Classifiers
+
+A collection on notebooks that cover building image classfiers using various deep learning frameworks as part of [this post](https://www.katnoria.com/cifar10-notebooks/).
+
+The objectives are to show how to:
+
+- create a simple classifier using CNNs
+- track experiments
+- use hyperparameter tuning frameworks
 
 
-# PyTorch Lightning
+# Frameworks
 
-```
-python lightning/trainer.py --max_epochs 10 
-```
+- TensorFlow
+- PyTorch
+- PyTorch Lightning
