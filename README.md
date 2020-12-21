@@ -1,4 +1,4 @@
-# Build CIFAR 10 Classifiers
+# Tutorial Notebooks on Building CIFAR 10 Classifier
 
 A collection on notebooks that cover building image classfiers using various deep learning frameworks as part of [this post](https://www.katnoria.com/cifar10-notebooks/).
 
