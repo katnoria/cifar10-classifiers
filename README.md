@@ -5,8 +5,8 @@ A collection on notebooks that cover building image classfiers using various dee
 The objectives are to show how to:
 
 - create a simple classifier using CNNs
-- track experiments
-- use hyperparameter tuning frameworks
+- track experiments using Comet.ml, WandB
+- use hyperparameter tuning frameworks such as Keras-Tuner, Optuna, Ray Tune
 
 
 # Frameworks
